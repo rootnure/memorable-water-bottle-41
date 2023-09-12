@@ -3,7 +3,7 @@ import './Header.css'
 const Header = () => {
     return (
         <div>
-            <h1>Vite + React</h1>
+            <h2>Memorable Water Bottle</h2>
 
         </div>
     );

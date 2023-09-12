@@ -13,9 +13,9 @@ const saveCartToLS = cart => {
 
 const addToLS = id => {
     const cart = getStoredCart();
-    cart.push(id);
+    cart.push(id); // push() will work here as it is inside plain JS file not inside React JSX
     // save to local storage
     saveCartToLS(cart);
 }
 
-export { addToLS }
+export { addToLS, getStoredCart }

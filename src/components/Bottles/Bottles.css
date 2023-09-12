@@ -1,10 +1,5 @@
-.bottle {
-    border: 2px solid gray;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.bottle img {
-    width: 100%;
+.bottles-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
