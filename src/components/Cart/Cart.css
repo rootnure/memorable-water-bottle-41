@@ -1,0 +1,41 @@
+.cart-container {
+    position: relative;
+}
+
+.cart-counter {
+    position: fixed;
+    bottom: -15px;
+    right: 5px;
+    background-color: skyblue;
+    color: black;
+    padding: 10px;
+    border-radius: 50%;
+    height: 26px;
+    width: 26px;
+}
+
+.cart-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.cart-items img {
+    width: 75px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import './Bottles.css';
 import { useEffect } from 'react';
 import Bottle from '../Bottle/Bottle';
-import { addToLS, getStoredCart } from '../../Utilities/localstorage';
+import { addToLS, getStoredCart, removeFromLS } from '../../Utilities/localstorage';
+import Cart from '../Cart/Cart';
 
 const Bottles = () => {
     const [bottles, setBottles] = useState([]);
@@ -19,10 +20,10 @@ const Bottles = () => {
         console.log('called the useEffect', bottles.length);
         if(bottles.length){
             const storedCart = getStoredCart();
-            console.log(storedCart, bottles);
+            // console.log(storedCart, bottles);
             const savedCart = [];
             for(const id of storedCart){
-                console.log(id);
+                // console.log(id);
                 const bottle = bottles.find(bottle => bottle.id === id);
                 if(bottle) {
                     savedCart.push(bottle);
@@ -39,22 +40,20 @@ const Bottles = () => {
         addToLS(bottle.id);
     }
 
-    const cartCounterStyles = {
-        position: 'fixed',
-        bottom: '-15px',
-        right: '5px',
-        backgroundColor: 'yellow',
-        color: 'black',
-        padding: '10px',
-        borderRadius: '50%',
-        height: '26px',
-        width: '26px',
-    };
+    const handleRemoveFromCart = id => {
+        // remove from visual state
+        const cartRemaining = cart.filter(item => item.id !== id);
+        setCart(cartRemaining);
+        // remove from local storage
+        removeFromLS(id);
+    }
 
     return (
-        <div style={{position: 'relative'}}>
+        <div>
             <h3>Bottles Available: {bottles.length}</h3>
-            <h4 style={cartCounterStyles}>{cart.length}</h4>
+            <Cart
+            cart={cart}
+            handleRemoveFromCart={handleRemoveFromCart} />
             <div className='bottles-container'>
                 {
                     bottles.map(bottle => <Bottle 
