@@ -11,24 +11,25 @@ const Bottles = () => {
 
     useEffect(() => {
         fetch('bottles.json')
-        .then(res => res.json())
-        .then(data => setBottles(data));
+            .then(res => res.json())
+            .then(data => setBottles(data));
     }, []);
 
     // load cart from local storage
     useEffect(() => {
         console.log('called the useEffect', bottles.length);
-        if(bottles.length){
+        if (bottles.length) {
             const storedCart = getStoredCart();
             // console.log(storedCart, bottles);
-            const savedCart = [];
-            for(const id of storedCart){
-                // console.log(id);
-                const bottle = bottles.find(bottle => bottle.id === id);
-                if(bottle) {
-                    savedCart.push(bottle);
-                }
-            }
+            const savedCart = bottles.filter(bottle => storedCart.includes(bottle.id));
+            // const savedCart = [];
+            // for(const id of storedCart){
+            //     // console.log(id);
+            //     const bottle = bottles.find(bottle => bottle.id === id);
+            //     if(bottle) {
+            //         savedCart.push(bottle);
+            //     }
+            // }
             console.log('saved cart:', savedCart);
             setCart(savedCart);
         }
@@ -52,12 +53,12 @@ const Bottles = () => {
         <div>
             <h3>Bottles Available: {bottles.length}</h3>
             <Cart
-            cart={cart}
-            handleRemoveFromCart={handleRemoveFromCart} />
+                cart={cart}
+                handleRemoveFromCart={handleRemoveFromCart} />
             <div className='bottles-container'>
                 {
-                    bottles.map(bottle => <Bottle 
-                        key={bottle.id} 
+                    bottles.map(bottle => <Bottle
+                        key={bottle.id}
                         bottle={bottle}
                         handleAddToCart={handleAddToCart} />)
                 }
